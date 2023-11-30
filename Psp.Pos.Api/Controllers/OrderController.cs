@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Psp.Pos.Api.Models;
+using static NuGet.Packaging.PackagingConstants;
 
 namespace Psp.Pos.Api.Controllers
 {
@@ -7,7 +8,7 @@ namespace Psp.Pos.Api.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
-        private static List<Order> orders = new List<Order>
+        private static List<Order> _orders = new List<Order>
         {
             new Order { Id = 1, AppointmentId = 101, DateTime = DateTime.Now.AddDays(1) },
             new Order { Id = 2, AppointmentId = 102, DateTime = DateTime.Now.AddDays(2) }
@@ -15,16 +16,21 @@ namespace Psp.Pos.Api.Controllers
 
         // GET: api/orders
         [HttpGet]
-        public ActionResult<IEnumerable<Order>> GetOrders()
+        public ActionResult<PaginatableResponseObject<IEnumerable<Order>>> GetProducts([FromQuery] int page = 1, [FromQuery] int pageSize = 1)
         {
-            return Ok(orders);
+            var orders = _orders;
+            var response = new PaginatableResponseObject<IEnumerable<Order>>();
+            var itemsToSkip = (page - 1) * pageSize;
+            response.Data = orders.Skip(itemsToSkip).Take(pageSize).ToList();
+            response.nextPage = "https://localhost:7064/api/Orders?page=" + (page + 1) + "&pageSize=" + pageSize;
+            return Ok(response);
         }
 
         // GET: api/orders/{id}
         [HttpGet("{id}")]
         public ActionResult<Order> GetOrder(int id)
         {
-            var order = orders.Find(o => o.Id == id);
+            var order = _orders.Find(o => o.Id == id);
 
             if (order == null)
             {
@@ -38,8 +44,8 @@ namespace Psp.Pos.Api.Controllers
         [HttpPost]
         public ActionResult<Order> CreateOrder([FromBody] Order newOrder)
         {
-            newOrder.Id = orders.Count + 1;
-            orders.Add(newOrder);
+            newOrder.Id = _orders.Count + 1;
+            _orders.Add(newOrder);
 
             return CreatedAtAction(nameof(GetOrder), new { id = newOrder.Id }, newOrder);
         }
@@ -48,7 +54,7 @@ namespace Psp.Pos.Api.Controllers
         [HttpPut("{id}")]
         public ActionResult<Order> UpdateOrder(int id, [FromBody] Order updatedOrder)
         {
-            var existingOrder = orders.Find(o => o.Id == id);
+            var existingOrder = _orders.Find(o => o.Id == id);
 
             if (existingOrder == null)
             {
@@ -66,14 +72,14 @@ namespace Psp.Pos.Api.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteOrder(int id)
         {
-            var orderToRemove = orders.Find(o => o.Id == id);
+            var orderToRemove = _orders.Find(o => o.Id == id);
 
             if (orderToRemove == null)
             {
                 return NotFound();
             }
 
-            orders.Remove(orderToRemove);
+            _orders.Remove(orderToRemove);
 
             return NoContent();
         }
