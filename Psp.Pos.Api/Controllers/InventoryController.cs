@@ -8,7 +8,7 @@ namespace Psp.Pos.Api.Controllers
     [ApiController]
     public class InventoryController : ControllerBase
     {
-        private static List<Inventory> inventoryList = new List<Inventory>
+        private static List<Inventory> _inventoryList = new List<Inventory>
         {
             new Inventory { Id = 1, ProductId = 201, SupplierId = 301, StockQuantity = 100 },
             new Inventory { Id = 2, ProductId = 202, SupplierId = 302, StockQuantity = 50 }
@@ -16,16 +16,21 @@ namespace Psp.Pos.Api.Controllers
 
         // GET: api/inventory
         [HttpGet]
-        public ActionResult<IEnumerable<Inventory>> GetInventory()
+        public ActionResult<PaginatableResponseObject<IEnumerable<Inventory>>> GetProducts([FromQuery] int page = 1, [FromQuery] int pageSize = 1)
         {
-            return Ok(inventoryList);
+            var inventoryList = _inventoryList;
+            var response = new PaginatableResponseObject<IEnumerable<Inventory>>();
+            var itemsToSkip = (page - 1) * pageSize;
+            response.Data = inventoryList.Skip(itemsToSkip).Take(pageSize).ToList();
+            response.nextPage = "https://localhost:7064/api/Inventory?page=" + (page + 1) + "&pageSize=" + pageSize;
+            return Ok(response);
         }
 
         // GET: api/inventory/{id}
         [HttpGet("{id}")]
         public ActionResult<Inventory> GetInventoryItem(int id)
         {
-            var inventoryItem = inventoryList.Find(item => item.Id == id);
+            var inventoryItem = _inventoryList.Find(item => item.Id == id);
 
             if (inventoryItem == null)
             {
@@ -39,8 +44,8 @@ namespace Psp.Pos.Api.Controllers
         [HttpPost]
         public ActionResult<Inventory> CreateInventoryItem([FromBody] Inventory newInventoryItem)
         {
-            newInventoryItem.Id = inventoryList.Count + 1;
-            inventoryList.Add(newInventoryItem);
+            newInventoryItem.Id = _inventoryList.Count + 1;
+            _inventoryList.Add(newInventoryItem);
 
             return CreatedAtAction(nameof(GetInventoryItem), new { id = newInventoryItem.Id }, newInventoryItem);
         }
@@ -49,7 +54,7 @@ namespace Psp.Pos.Api.Controllers
         [HttpPut("{id}")]
         public ActionResult<Inventory> UpdateInventoryItem(int id, [FromBody] Inventory updatedInventoryItem)
         {
-            var existingInventoryItem = inventoryList.Find(item => item.Id == id);
+            var existingInventoryItem = _inventoryList.Find(item => item.Id == id);
 
             if (existingInventoryItem == null)
             {
@@ -68,14 +73,14 @@ namespace Psp.Pos.Api.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteInventoryItem(int id)
         {
-            var inventoryItemToRemove = inventoryList.Find(item => item.Id == id);
+            var inventoryItemToRemove = _inventoryList.Find(item => item.Id == id);
 
             if (inventoryItemToRemove == null)
             {
                 return NotFound();
             }
 
-            inventoryList.Remove(inventoryItemToRemove);
+            _inventoryList.Remove(inventoryItemToRemove);
 
             return NoContent();
         }
