@@ -9,24 +9,24 @@ namespace Psp.Pos.Api.Controllers
     [ApiController]
     public class AppointmentController : ControllerBase
     {
-        private static List<Appointment> appointments = new List<Appointment>
+        private static readonly  List<Appointment> Appointments = new List<Appointment>
         {
             new Appointment { Id = 1, CustomerId = 101, StaffUserId = 201, DateTime = DateTime.Now.AddDays(1), Status = "Pending" },
             new Appointment { Id = 2, CustomerId = 102, StaffUserId = 202, DateTime = DateTime.Now.AddDays(2), Status = "Confirmed" }
         };
 
-        // GET: api/appointments
+        // GET: api/Appointments
         [HttpGet]
         public ActionResult<IEnumerable<Appointment>> GetAppointments()
         {
-            return Ok(appointments);
+            return Ok(Appointments);
         }
 
-        // GET: api/appointments/{id}
+        // GET: api/Appointments/{id}
         [HttpGet("{id}")]
         public ActionResult<Appointment> GetAppointment(int id)
         {
-            var appointment = appointments.Find(a => a.Id == id);
+            var appointment = Appointments.Find(a => a.Id == id);
 
             if (appointment == null)
             {
@@ -36,21 +36,21 @@ namespace Psp.Pos.Api.Controllers
             return Ok(appointment);
         }
 
-        // POST: api/appointments
+        // POST: api/Appointments
         [HttpPost]
         public ActionResult<Appointment> CreateAppointment([FromBody] Appointment newAppointment)
         {
-            newAppointment.Id = appointments.Count + 1;
-            appointments.Add(newAppointment);
+            newAppointment.Id = Appointments.Count + 1;
+            Appointments.Add(newAppointment);
 
             return CreatedAtAction(nameof(GetAppointment), new { id = newAppointment.Id }, newAppointment);
         }
 
-        // PUT: api/appointments/{id}
+        // PUT: api/Appointments/{id}
         [HttpPut("{id}")]
         public ActionResult<Appointment> UpdateAppointment(int id, [FromBody] Appointment updatedAppointment)
         {
-            var existingAppointment = appointments.Find(a => a.Id == id);
+            var existingAppointment = Appointments.Find(a => a.Id == id);
 
             if (existingAppointment == null)
             {
@@ -66,18 +66,18 @@ namespace Psp.Pos.Api.Controllers
             return Ok(existingAppointment);
         }
 
-        // DELETE: api/appointments/{id}
+        // DELETE: api/Appointments/{id}
         [HttpDelete("{id}")]
         public ActionResult DeleteAppointment(int id)
         {
-            var appointmentToRemove = appointments.Find(a => a.Id == id);
+            var appointmentToRemove = Appointments.Find(a => a.Id == id);
 
             if (appointmentToRemove == null)
             {
                 return NotFound();
             }
 
-            appointments.Remove(appointmentToRemove);
+            Appointments.Remove(appointmentToRemove);
 
             return NoContent();
         }

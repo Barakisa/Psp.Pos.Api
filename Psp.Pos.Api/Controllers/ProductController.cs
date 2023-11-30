@@ -8,7 +8,7 @@ namespace Psp.Pos.Api.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private static List<Product> products = new List<Product>
+        private static List<Product> _products = new()
         {
             new Product { Id = 1, Name = "Product A", Category = "Category A", Price = 500 }, // assuming the price is in cents
             new Product { Id = 2, Name = "Product B", Category = "Category B", Price = 800 }
@@ -16,15 +16,21 @@ namespace Psp.Pos.Api.Controllers
 
         // GET: api/products
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> GetProducts()
+        public ActionResult<PaginatableResponseObject<IEnumerable<Product>>> GetProducts([FromQuery] int page = 1, [FromQuery] int pageSize = 1)
         {
-            return Ok(products);
+            var products = _products;
+            var response = new PaginatableResponseObject<IEnumerable<Product>>();
+            var itemsToSkip = (page - 1) * pageSize;
+            response.Data = products.Skip(itemsToSkip).Take(pageSize).ToList();
+            response.nextPage = "https://localhost:7064/api/Products?page=" + (page + 1) + "&pageSize=" + pageSize;
+            return Ok(response);
         }
 
         // GET: api/products/{id}
         [HttpGet("{id}")]
         public ActionResult<Product> GetProduct(int id)
         {
+            var products = _products;
             var product = products.Find(p => p.Id == id);
 
             if (product == null)
@@ -39,6 +45,7 @@ namespace Psp.Pos.Api.Controllers
         [HttpPost]
         public ActionResult<Product> CreateProduct([FromBody] Product newProduct)
         {
+            var products = _products;
             newProduct.Id = products.Count + 1;
             products.Add(newProduct);
 
@@ -49,6 +56,7 @@ namespace Psp.Pos.Api.Controllers
         [HttpPut("{id}")]
         public ActionResult<Product> UpdateProduct(int id, [FromBody] Product updatedProduct)
         {
+            var products = _products;
             var existingProduct = products.Find(p => p.Id == id);
 
             if (existingProduct == null)
@@ -68,6 +76,7 @@ namespace Psp.Pos.Api.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteProduct(int id)
         {
+            var products = _products;
             var productToRemove = products.Find(p => p.Id == id);
 
             if (productToRemove == null)

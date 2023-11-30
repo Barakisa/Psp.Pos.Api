@@ -1,12 +1,13 @@
-﻿openapi: 3.0.1
+﻿---
+openapi: 3.0.1
 info:
   title: Psp.Pos.Api
   version: '1.0'
 paths:
-  /api/Appointment:
+  "/api/Appointment":
     get:
       tags:
-        - Appointment
+      - Appointment
       responses:
         '200':
           description: Success
@@ -15,119 +16,167 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Appointment'
+                  "$ref": "#/components/schemas/Appointment"
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Appointment'
+                  "$ref": "#/components/schemas/Appointment"
             text/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Appointment'
+                  "$ref": "#/components/schemas/Appointment"
     post:
       tags:
-        - Appointment
+      - Appointment
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Appointment'
+              "$ref": "#/components/schemas/Appointment"
           text/json:
             schema:
-              $ref: '#/components/schemas/Appointment'
+              "$ref": "#/components/schemas/Appointment"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/Appointment'
+              "$ref": "#/components/schemas/Appointment"
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Appointment'
+                "$ref": "#/components/schemas/Appointment"
             application/json:
               schema:
-                $ref: '#/components/schemas/Appointment'
+                "$ref": "#/components/schemas/Appointment"
             text/json:
               schema:
-                $ref: '#/components/schemas/Appointment'
-  /api/Appointment/{id}:
+                "$ref": "#/components/schemas/Appointment"
+  "/api/Appointment/{id}":
     get:
       tags:
-        - Appointment
+      - Appointment
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Appointment'
+                "$ref": "#/components/schemas/Appointment"
             application/json:
               schema:
-                $ref: '#/components/schemas/Appointment'
+                "$ref": "#/components/schemas/Appointment"
             text/json:
               schema:
-                $ref: '#/components/schemas/Appointment'
+                "$ref": "#/components/schemas/Appointment"
     put:
       tags:
-        - Appointment
+      - Appointment
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Appointment'
+              "$ref": "#/components/schemas/Appointment"
           text/json:
             schema:
-              $ref: '#/components/schemas/Appointment'
+              "$ref": "#/components/schemas/Appointment"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/Appointment'
+              "$ref": "#/components/schemas/Appointment"
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Appointment'
+                "$ref": "#/components/schemas/Appointment"
             application/json:
               schema:
-                $ref: '#/components/schemas/Appointment'
+                "$ref": "#/components/schemas/Appointment"
             text/json:
               schema:
-                $ref: '#/components/schemas/Appointment'
+                "$ref": "#/components/schemas/Appointment"
     delete:
       tags:
-        - Appointment
+      - Appointment
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Success
-  /api/Customers:
+  "/api/Cheque/{id}":
     get:
       tags:
-        - Customers
+      - Cheque
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                "$ref": "#/components/schemas/Cheque"
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Cheque"
+            text/json:
+              schema:
+                "$ref": "#/components/schemas/Cheque"
+  "/api/Cheque/orderId/{orderId}":
+    get:
+      tags:
+      - Cheque
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                "$ref": "#/components/schemas/Cheque"
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Cheque"
+            text/json:
+              schema:
+                "$ref": "#/components/schemas/Cheque"
+  "/api/Customers":
+    get:
+      tags:
+      - Customers
       responses:
         '200':
           description: Success
@@ -136,119 +185,119 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Customer'
+                  "$ref": "#/components/schemas/Customer"
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Customer'
+                  "$ref": "#/components/schemas/Customer"
             text/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Customer'
+                  "$ref": "#/components/schemas/Customer"
     post:
       tags:
-        - Customers
+      - Customers
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Customer'
+              "$ref": "#/components/schemas/Customer"
           text/json:
             schema:
-              $ref: '#/components/schemas/Customer'
+              "$ref": "#/components/schemas/Customer"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/Customer'
+              "$ref": "#/components/schemas/Customer"
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Customer'
+                "$ref": "#/components/schemas/Customer"
             application/json:
               schema:
-                $ref: '#/components/schemas/Customer'
+                "$ref": "#/components/schemas/Customer"
             text/json:
               schema:
-                $ref: '#/components/schemas/Customer'
-  /api/Customers/{id}:
+                "$ref": "#/components/schemas/Customer"
+  "/api/Customers/{id}":
     get:
       tags:
-        - Customers
+      - Customers
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Customer'
+                "$ref": "#/components/schemas/Customer"
             application/json:
               schema:
-                $ref: '#/components/schemas/Customer'
+                "$ref": "#/components/schemas/Customer"
             text/json:
               schema:
-                $ref: '#/components/schemas/Customer'
+                "$ref": "#/components/schemas/Customer"
     put:
       tags:
-        - Customers
+      - Customers
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Customer'
+              "$ref": "#/components/schemas/Customer"
           text/json:
             schema:
-              $ref: '#/components/schemas/Customer'
+              "$ref": "#/components/schemas/Customer"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/Customer'
+              "$ref": "#/components/schemas/Customer"
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Customer'
+                "$ref": "#/components/schemas/Customer"
             application/json:
               schema:
-                $ref: '#/components/schemas/Customer'
+                "$ref": "#/components/schemas/Customer"
             text/json:
               schema:
-                $ref: '#/components/schemas/Customer'
+                "$ref": "#/components/schemas/Customer"
     delete:
       tags:
-        - Customers
+      - Customers
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Success
-  /api/Inventory:
+  "/api/Inventory":
     get:
       tags:
-        - Inventory
+      - Inventory
       responses:
         '200':
           description: Success
@@ -257,119 +306,119 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Inventory'
+                  "$ref": "#/components/schemas/Inventory"
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Inventory'
+                  "$ref": "#/components/schemas/Inventory"
             text/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Inventory'
+                  "$ref": "#/components/schemas/Inventory"
     post:
       tags:
-        - Inventory
+      - Inventory
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Inventory'
+              "$ref": "#/components/schemas/Inventory"
           text/json:
             schema:
-              $ref: '#/components/schemas/Inventory'
+              "$ref": "#/components/schemas/Inventory"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/Inventory'
+              "$ref": "#/components/schemas/Inventory"
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Inventory'
+                "$ref": "#/components/schemas/Inventory"
             application/json:
               schema:
-                $ref: '#/components/schemas/Inventory'
+                "$ref": "#/components/schemas/Inventory"
             text/json:
               schema:
-                $ref: '#/components/schemas/Inventory'
-  /api/Inventory/{id}:
+                "$ref": "#/components/schemas/Inventory"
+  "/api/Inventory/{id}":
     get:
       tags:
-        - Inventory
+      - Inventory
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Inventory'
+                "$ref": "#/components/schemas/Inventory"
             application/json:
               schema:
-                $ref: '#/components/schemas/Inventory'
+                "$ref": "#/components/schemas/Inventory"
             text/json:
               schema:
-                $ref: '#/components/schemas/Inventory'
+                "$ref": "#/components/schemas/Inventory"
     put:
       tags:
-        - Inventory
+      - Inventory
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Inventory'
+              "$ref": "#/components/schemas/Inventory"
           text/json:
             schema:
-              $ref: '#/components/schemas/Inventory'
+              "$ref": "#/components/schemas/Inventory"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/Inventory'
+              "$ref": "#/components/schemas/Inventory"
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Inventory'
+                "$ref": "#/components/schemas/Inventory"
             application/json:
               schema:
-                $ref: '#/components/schemas/Inventory'
+                "$ref": "#/components/schemas/Inventory"
             text/json:
               schema:
-                $ref: '#/components/schemas/Inventory'
+                "$ref": "#/components/schemas/Inventory"
     delete:
       tags:
-        - Inventory
+      - Inventory
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Success
-  /api/OrderDetails:
+  "/api/OrderItems":
     get:
       tags:
-        - OrderDetails
+      - OrderItems
       responses:
         '200':
           description: Success
@@ -378,119 +427,135 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/OrderDetails'
+                  "$ref": "#/components/schemas/OrderItems"
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/OrderDetails'
+                  "$ref": "#/components/schemas/OrderItems"
             text/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/OrderDetails'
+                  "$ref": "#/components/schemas/OrderItems"
     post:
       tags:
-        - OrderDetails
+      - OrderItems
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OrderDetails'
+              "$ref": "#/components/schemas/OrderItems"
           text/json:
             schema:
-              $ref: '#/components/schemas/OrderDetails'
+              "$ref": "#/components/schemas/OrderItems"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/OrderDetails'
+              "$ref": "#/components/schemas/OrderItems"
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/OrderDetails'
+                "$ref": "#/components/schemas/OrderItems"
             application/json:
               schema:
-                $ref: '#/components/schemas/OrderDetails'
+                "$ref": "#/components/schemas/OrderItems"
             text/json:
               schema:
-                $ref: '#/components/schemas/OrderDetails'
-  /api/OrderDetails/{id}:
+                "$ref": "#/components/schemas/OrderItems"
+  "/api/OrderItems/{orderId}/{productId}":
     get:
       tags:
-        - OrderDetails
+      - OrderItems
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: productId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/OrderDetails'
+                "$ref": "#/components/schemas/OrderItems"
             application/json:
               schema:
-                $ref: '#/components/schemas/OrderDetails'
+                "$ref": "#/components/schemas/OrderItems"
             text/json:
               schema:
-                $ref: '#/components/schemas/OrderDetails'
+                "$ref": "#/components/schemas/OrderItems"
     put:
       tags:
-        - OrderDetails
+      - OrderItems
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: productId
+        in: path
+        required: true
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OrderDetails'
+              "$ref": "#/components/schemas/OrderItems"
           text/json:
             schema:
-              $ref: '#/components/schemas/OrderDetails'
+              "$ref": "#/components/schemas/OrderItems"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/OrderDetails'
+              "$ref": "#/components/schemas/OrderItems"
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/OrderDetails'
+                "$ref": "#/components/schemas/OrderItems"
             application/json:
               schema:
-                $ref: '#/components/schemas/OrderDetails'
+                "$ref": "#/components/schemas/OrderItems"
             text/json:
               schema:
-                $ref: '#/components/schemas/OrderDetails'
+                "$ref": "#/components/schemas/OrderItems"
     delete:
       tags:
-        - OrderDetails
+      - OrderItems
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: productId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Success
-  /api/Orders:
+  "/api/Orders":
     get:
       tags:
-        - Orders
+      - Orders
       responses:
         '200':
           description: Success
@@ -499,240 +564,247 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Order'
+                  "$ref": "#/components/schemas/Order"
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Order'
+                  "$ref": "#/components/schemas/Order"
             text/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Order'
+                  "$ref": "#/components/schemas/Order"
     post:
       tags:
-        - Orders
+      - Orders
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Order'
+              "$ref": "#/components/schemas/Order"
           text/json:
             schema:
-              $ref: '#/components/schemas/Order'
+              "$ref": "#/components/schemas/Order"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/Order'
+              "$ref": "#/components/schemas/Order"
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Order'
+                "$ref": "#/components/schemas/Order"
             application/json:
               schema:
-                $ref: '#/components/schemas/Order'
+                "$ref": "#/components/schemas/Order"
             text/json:
               schema:
-                $ref: '#/components/schemas/Order'
-  /api/Orders/{id}:
+                "$ref": "#/components/schemas/Order"
+  "/api/Orders/{id}":
     get:
       tags:
-        - Orders
+      - Orders
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Order'
+                "$ref": "#/components/schemas/Order"
             application/json:
               schema:
-                $ref: '#/components/schemas/Order'
+                "$ref": "#/components/schemas/Order"
             text/json:
               schema:
-                $ref: '#/components/schemas/Order'
+                "$ref": "#/components/schemas/Order"
     put:
       tags:
-        - Orders
+      - Orders
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Order'
+              "$ref": "#/components/schemas/Order"
           text/json:
             schema:
-              $ref: '#/components/schemas/Order'
+              "$ref": "#/components/schemas/Order"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/Order'
+              "$ref": "#/components/schemas/Order"
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Order'
+                "$ref": "#/components/schemas/Order"
             application/json:
               schema:
-                $ref: '#/components/schemas/Order'
+                "$ref": "#/components/schemas/Order"
             text/json:
               schema:
-                $ref: '#/components/schemas/Order'
+                "$ref": "#/components/schemas/Order"
     delete:
       tags:
-        - Orders
+      - Orders
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Success
-  /api/Products:
+  "/api/Products":
     get:
       tags:
-        - Products
+      - Products
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Product'
+                "$ref": "#/components/schemas/ProductIEnumerablePaginatableResponseObject"
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Product'
+                "$ref": "#/components/schemas/ProductIEnumerablePaginatableResponseObject"
             text/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Product'
+                "$ref": "#/components/schemas/ProductIEnumerablePaginatableResponseObject"
     post:
       tags:
-        - Products
+      - Products
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Product'
+              "$ref": "#/components/schemas/Product"
           text/json:
             schema:
-              $ref: '#/components/schemas/Product'
+              "$ref": "#/components/schemas/Product"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/Product'
+              "$ref": "#/components/schemas/Product"
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Product'
+                "$ref": "#/components/schemas/Product"
             application/json:
               schema:
-                $ref: '#/components/schemas/Product'
+                "$ref": "#/components/schemas/Product"
             text/json:
               schema:
-                $ref: '#/components/schemas/Product'
-  /api/Products/{id}:
+                "$ref": "#/components/schemas/Product"
+  "/api/Products/{id}":
     get:
       tags:
-        - Products
+      - Products
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Product'
+                "$ref": "#/components/schemas/Product"
             application/json:
               schema:
-                $ref: '#/components/schemas/Product'
+                "$ref": "#/components/schemas/Product"
             text/json:
               schema:
-                $ref: '#/components/schemas/Product'
+                "$ref": "#/components/schemas/Product"
     put:
       tags:
-        - Products
+      - Products
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Product'
+              "$ref": "#/components/schemas/Product"
           text/json:
             schema:
-              $ref: '#/components/schemas/Product'
+              "$ref": "#/components/schemas/Product"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/Product'
+              "$ref": "#/components/schemas/Product"
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Product'
+                "$ref": "#/components/schemas/Product"
             application/json:
               schema:
-                $ref: '#/components/schemas/Product'
+                "$ref": "#/components/schemas/Product"
             text/json:
               schema:
-                $ref: '#/components/schemas/Product'
+                "$ref": "#/components/schemas/Product"
     delete:
       tags:
-        - Products
+      - Products
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Success
-  /api/StaffUsers:
+  "/api/StaffUsers":
     get:
       tags:
-        - StaffUsers
+      - StaffUsers
       responses:
         '200':
           description: Success
@@ -741,119 +813,119 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/StaffUser'
+                  "$ref": "#/components/schemas/StaffUser"
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/StaffUser'
+                  "$ref": "#/components/schemas/StaffUser"
             text/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/StaffUser'
+                  "$ref": "#/components/schemas/StaffUser"
     post:
       tags:
-        - StaffUsers
+      - StaffUsers
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StaffUser'
+              "$ref": "#/components/schemas/StaffUser"
           text/json:
             schema:
-              $ref: '#/components/schemas/StaffUser'
+              "$ref": "#/components/schemas/StaffUser"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/StaffUser'
+              "$ref": "#/components/schemas/StaffUser"
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/StaffUser'
+                "$ref": "#/components/schemas/StaffUser"
             application/json:
               schema:
-                $ref: '#/components/schemas/StaffUser'
+                "$ref": "#/components/schemas/StaffUser"
             text/json:
               schema:
-                $ref: '#/components/schemas/StaffUser'
-  /api/StaffUsers/{id}:
+                "$ref": "#/components/schemas/StaffUser"
+  "/api/StaffUsers/{id}":
     get:
       tags:
-        - StaffUsers
+      - StaffUsers
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/StaffUser'
+                "$ref": "#/components/schemas/StaffUser"
             application/json:
               schema:
-                $ref: '#/components/schemas/StaffUser'
+                "$ref": "#/components/schemas/StaffUser"
             text/json:
               schema:
-                $ref: '#/components/schemas/StaffUser'
+                "$ref": "#/components/schemas/StaffUser"
     put:
       tags:
-        - StaffUsers
+      - StaffUsers
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StaffUser'
+              "$ref": "#/components/schemas/StaffUser"
           text/json:
             schema:
-              $ref: '#/components/schemas/StaffUser'
+              "$ref": "#/components/schemas/StaffUser"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/StaffUser'
+              "$ref": "#/components/schemas/StaffUser"
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/StaffUser'
+                "$ref": "#/components/schemas/StaffUser"
             application/json:
               schema:
-                $ref: '#/components/schemas/StaffUser'
+                "$ref": "#/components/schemas/StaffUser"
             text/json:
               schema:
-                $ref: '#/components/schemas/StaffUser'
+                "$ref": "#/components/schemas/StaffUser"
     delete:
       tags:
-        - StaffUsers
+      - StaffUsers
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Success
-  /api/Suppliers:
+  "/api/Suppliers":
     get:
       tags:
-        - Suppliers
+      - Suppliers
       responses:
         '200':
           description: Success
@@ -862,119 +934,119 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Supplier'
+                  "$ref": "#/components/schemas/Supplier"
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Supplier'
+                  "$ref": "#/components/schemas/Supplier"
             text/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Supplier'
+                  "$ref": "#/components/schemas/Supplier"
     post:
       tags:
-        - Suppliers
+      - Suppliers
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Supplier'
+              "$ref": "#/components/schemas/Supplier"
           text/json:
             schema:
-              $ref: '#/components/schemas/Supplier'
+              "$ref": "#/components/schemas/Supplier"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/Supplier'
+              "$ref": "#/components/schemas/Supplier"
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Supplier'
+                "$ref": "#/components/schemas/Supplier"
             application/json:
               schema:
-                $ref: '#/components/schemas/Supplier'
+                "$ref": "#/components/schemas/Supplier"
             text/json:
               schema:
-                $ref: '#/components/schemas/Supplier'
-  /api/Suppliers/{id}:
+                "$ref": "#/components/schemas/Supplier"
+  "/api/Suppliers/{id}":
     get:
       tags:
-        - Suppliers
+      - Suppliers
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Supplier'
+                "$ref": "#/components/schemas/Supplier"
             application/json:
               schema:
-                $ref: '#/components/schemas/Supplier'
+                "$ref": "#/components/schemas/Supplier"
             text/json:
               schema:
-                $ref: '#/components/schemas/Supplier'
+                "$ref": "#/components/schemas/Supplier"
     put:
       tags:
-        - Suppliers
+      - Suppliers
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Supplier'
+              "$ref": "#/components/schemas/Supplier"
           text/json:
             schema:
-              $ref: '#/components/schemas/Supplier'
+              "$ref": "#/components/schemas/Supplier"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/Supplier'
+              "$ref": "#/components/schemas/Supplier"
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Supplier'
+                "$ref": "#/components/schemas/Supplier"
             application/json:
               schema:
-                $ref: '#/components/schemas/Supplier'
+                "$ref": "#/components/schemas/Supplier"
             text/json:
               schema:
-                $ref: '#/components/schemas/Supplier'
+                "$ref": "#/components/schemas/Supplier"
     delete:
       tags:
-        - Suppliers
+      - Suppliers
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Success
-  /api/Transactions:
+  "/api/Transactions":
     get:
       tags:
-        - Transactions
+      - Transactions
       responses:
         '200':
           description: Success
@@ -983,112 +1055,112 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Transaction'
+                  "$ref": "#/components/schemas/Transaction"
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Transaction'
+                  "$ref": "#/components/schemas/Transaction"
             text/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Transaction'
+                  "$ref": "#/components/schemas/Transaction"
     post:
       tags:
-        - Transactions
+      - Transactions
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Transaction'
+              "$ref": "#/components/schemas/Transaction"
           text/json:
             schema:
-              $ref: '#/components/schemas/Transaction'
+              "$ref": "#/components/schemas/Transaction"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/Transaction'
+              "$ref": "#/components/schemas/Transaction"
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Transaction'
+                "$ref": "#/components/schemas/Transaction"
             application/json:
               schema:
-                $ref: '#/components/schemas/Transaction'
+                "$ref": "#/components/schemas/Transaction"
             text/json:
               schema:
-                $ref: '#/components/schemas/Transaction'
-  /api/Transactions/{id}:
+                "$ref": "#/components/schemas/Transaction"
+  "/api/Transactions/{id}":
     get:
       tags:
-        - Transactions
+      - Transactions
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Transaction'
+                "$ref": "#/components/schemas/Transaction"
             application/json:
               schema:
-                $ref: '#/components/schemas/Transaction'
+                "$ref": "#/components/schemas/Transaction"
             text/json:
               schema:
-                $ref: '#/components/schemas/Transaction'
+                "$ref": "#/components/schemas/Transaction"
     put:
       tags:
-        - Transactions
+      - Transactions
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Transaction'
+              "$ref": "#/components/schemas/Transaction"
           text/json:
             schema:
-              $ref: '#/components/schemas/Transaction'
+              "$ref": "#/components/schemas/Transaction"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/Transaction'
+              "$ref": "#/components/schemas/Transaction"
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Transaction'
+                "$ref": "#/components/schemas/Transaction"
             application/json:
               schema:
-                $ref: '#/components/schemas/Transaction'
+                "$ref": "#/components/schemas/Transaction"
             text/json:
               schema:
-                $ref: '#/components/schemas/Transaction'
+                "$ref": "#/components/schemas/Transaction"
     delete:
       tags:
-        - Transactions
+      - Transactions
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
       responses:
         '200':
           description: Success
@@ -1112,6 +1184,42 @@ components:
         status:
           type: string
           nullable: true
+      additionalProperties: false
+    Cheque:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        orderId:
+          type: integer
+          format: int32
+        time:
+          type: integer
+          format: int64
+        itemsWithPrices:
+          type: array
+          items:
+            "$ref": "#/components/schemas/OrderItemsWithPrices"
+          nullable: true
+        paymentType:
+          type: string
+          nullable: true
+        tax:
+          type: integer
+          format: int32
+        totalDiscount:
+          type: integer
+          format: int32
+        price:
+          type: integer
+          format: int32
+        priceWithTax:
+          type: integer
+          format: int32
+        priceWithTaxAndDiscount:
+          type: integer
+          format: int32
       additionalProperties: false
     Customer:
       type: object
@@ -1166,12 +1274,9 @@ components:
           type: string
           format: date-time
       additionalProperties: false
-    OrderDetails:
+    OrderItems:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
         orderId:
           type: integer
           format: int32
@@ -1179,6 +1284,19 @@ components:
           type: integer
           format: int32
         quantity:
+          type: integer
+          format: int32
+      additionalProperties: false
+    OrderItemsWithPrices:
+      type: object
+      properties:
+        name:
+          type: integer
+          format: int32
+        quantity:
+          type: integer
+          format: int32
+        price:
           type: integer
           format: int32
       additionalProperties: false
@@ -1197,6 +1315,18 @@ components:
         price:
           type: integer
           format: int32
+      additionalProperties: false
+    ProductIEnumerablePaginatableResponseObject:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Product"
+          nullable: true
+        nextPage:
+          type: string
+          nullable: true
       additionalProperties: false
     StaffUser:
       type: object
