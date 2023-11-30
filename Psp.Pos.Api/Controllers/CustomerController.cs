@@ -9,7 +9,7 @@ namespace Psp.Pos.Api.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        private static List<Customer> customers = new List<Customer>
+        private static List<Customer> _customers = new List<Customer>
         {
             new Customer { Id = 1, Name = "John Doe", Email = "john.doe@pspsps.lt", LoyaltyPoints = 100, LoyaltyLevel = "Silver", FeedBack = new[] { "Great service!" } },
             new Customer { Id = 2, Name = "Jane Smith", Email = "jane.smith@pspsps.lt", LoyaltyPoints = 200, LoyaltyLevel = "Gold", FeedBack = new[] { "Excellent experience!" } }
@@ -17,16 +17,21 @@ namespace Psp.Pos.Api.Controllers
 
         // GET: api/customers
         [HttpGet]
-        public ActionResult<IEnumerable<Customer>> GetCustomers()
+        public ActionResult<PaginatableResponseObject<IEnumerable<Customer>>> GetCustomers([FromQuery] int page = 1, [FromQuery] int pageSize = 1)
         {
-            return Ok(customers);
+            var customers = _customers;
+            var response = new PaginatableResponseObject<IEnumerable<Customer>>();
+            var itemsToSkip = (page - 1) * pageSize;
+            response.Data = (IEnumerable<Customer>)_customers.Skip(itemsToSkip).Take(pageSize).ToList();
+            response.nextPage = "https://localhost:7064/api/Customers?page=" + (page + 1) + "&pageSize=" + pageSize;
+            return Ok(response);
         }
 
         // GET: api/customers/{id}
         [HttpGet("{id}")]
         public ActionResult<Customer> GetCustomer(int id)
         {
-            var customer = customers.Find(c => c.Id == id);
+            var customer = _customers.Find(c => c.Id == id);
 
             if (customer == null)
             {
@@ -40,8 +45,8 @@ namespace Psp.Pos.Api.Controllers
         [HttpPost]
         public ActionResult<Customer> CreateCustomer([FromBody] Customer newCustomer)
         {
-            newCustomer.Id = customers.Count + 1;
-            customers.Add(newCustomer);
+            newCustomer.Id = _customers.Count + 1;
+            _customers.Add(newCustomer);
 
             return CreatedAtAction(nameof(GetCustomer), new { id = newCustomer.Id }, newCustomer);
         }
@@ -50,7 +55,7 @@ namespace Psp.Pos.Api.Controllers
         [HttpPut("{id}")]
         public ActionResult<Customer> UpdateCustomer(int id, [FromBody] Customer updatedCustomer)
         {
-            var existingCustomer = customers.Find(c => c.Id == id);
+            var existingCustomer = _customers.Find(c => c.Id == id);
 
             if (existingCustomer == null)
             {
@@ -71,14 +76,14 @@ namespace Psp.Pos.Api.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteCustomer(int id)
         {
-            var customerToRemove = customers.Find(c => c.Id == id);
+            var customerToRemove = _customers.Find(c => c.Id == id);
 
             if (customerToRemove == null)
             {
                 return NotFound();
             }
 
-            customers.Remove(customerToRemove);
+            _customers.Remove(customerToRemove);
 
             return NoContent();
         }
