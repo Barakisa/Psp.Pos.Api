@@ -10,7 +10,8 @@ namespace Psp.Pos.Api.Controllers
     [ApiController]
     public class ChequeController : ControllerBase
     {
-        private static List<Cheque> cheques = new List<Cheque>
+
+        private static List<Cheque> _cheques = new List<Cheque>
         {
             new Cheque
             {
@@ -53,7 +54,7 @@ namespace Psp.Pos.Api.Controllers
         [HttpGet("{id}")]
         public ActionResult<Cheque> GetChequeById(int id)
         {
-            var cheque = cheques.Find(c => c.Id == id);
+            var cheque = _cheques.Find(c => c.Id == id);
 
             if (cheque == null)
             {
@@ -66,7 +67,7 @@ namespace Psp.Pos.Api.Controllers
         [HttpGet("orderId/{orderId}")]
         public ActionResult<Cheque> GetChequeByOrderId(int orderId)
         {
-            var cheque = cheques.Find(c => c.OrderId == orderId);
+            var cheque = _cheques.Find(c => c.OrderId == orderId);
 
             if (cheque == null)
             {
