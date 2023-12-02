@@ -8,25 +8,32 @@ paths:
     get:
       tags:
       - Appointment
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Appointment"
+                "$ref": "#/components/schemas/AppointmentIEnumerablePaginatableResponseObject"
             application/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Appointment"
+                "$ref": "#/components/schemas/AppointmentIEnumerablePaginatableResponseObject"
             text/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Appointment"
+                "$ref": "#/components/schemas/AppointmentIEnumerablePaginatableResponseObject"
     post:
       tags:
       - Appointment
@@ -125,77 +132,36 @@ paths:
       responses:
         '200':
           description: Success
-  "/api/Cheque/{id}":
-    get:
-      tags:
-      - Cheque
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                "$ref": "#/components/schemas/Cheque"
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/Cheque"
-            text/json:
-              schema:
-                "$ref": "#/components/schemas/Cheque"
-  "/api/Cheque/orderId/{orderId}":
-    get:
-      tags:
-      - Cheque
-      parameters:
-      - name: orderId
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                "$ref": "#/components/schemas/Cheque"
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/Cheque"
-            text/json:
-              schema:
-                "$ref": "#/components/schemas/Cheque"
   "/api/Customers":
     get:
       tags:
       - Customers
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Customer"
+                "$ref": "#/components/schemas/CustomerIEnumerablePaginatableResponseObject"
             application/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Customer"
+                "$ref": "#/components/schemas/CustomerIEnumerablePaginatableResponseObject"
             text/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Customer"
+                "$ref": "#/components/schemas/CustomerIEnumerablePaginatableResponseObject"
     post:
       tags:
       - Customers
@@ -298,25 +264,32 @@ paths:
     get:
       tags:
       - Inventory
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Inventory"
+                "$ref": "#/components/schemas/InventoryIEnumerablePaginatableResponseObject"
             application/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Inventory"
+                "$ref": "#/components/schemas/InventoryIEnumerablePaginatableResponseObject"
             text/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Inventory"
+                "$ref": "#/components/schemas/InventoryIEnumerablePaginatableResponseObject"
     post:
       tags:
       - Inventory
@@ -419,25 +392,32 @@ paths:
     get:
       tags:
       - OrderItems
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/OrderItems"
+                "$ref": "#/components/schemas/OrderItemsIEnumerablePaginatableResponseObject"
             application/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/OrderItems"
+                "$ref": "#/components/schemas/OrderItemsIEnumerablePaginatableResponseObject"
             text/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/OrderItems"
+                "$ref": "#/components/schemas/OrderItemsIEnumerablePaginatableResponseObject"
     post:
       tags:
       - OrderItems
@@ -556,52 +536,70 @@ paths:
     get:
       tags:
       - Orders
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: fullInfo
+        in: query
+        schema:
+          type: boolean
+          default: false
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Order"
+                "$ref": "#/components/schemas/ChequeIEnumerablePaginatableResponseObject"
             application/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Order"
+                "$ref": "#/components/schemas/ChequeIEnumerablePaginatableResponseObject"
             text/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Order"
+                "$ref": "#/components/schemas/ChequeIEnumerablePaginatableResponseObject"
     post:
       tags:
       - Orders
+      parameters:
+      - name: fullInfo
+        in: query
+        schema:
+          type: boolean
+          default: false
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Order"
+              "$ref": "#/components/schemas/Cheque"
           text/json:
             schema:
-              "$ref": "#/components/schemas/Order"
+              "$ref": "#/components/schemas/Cheque"
           application/*+json:
             schema:
-              "$ref": "#/components/schemas/Order"
+              "$ref": "#/components/schemas/Cheque"
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                "$ref": "#/components/schemas/Order"
+                "$ref": "#/components/schemas/Cheque"
             application/json:
               schema:
-                "$ref": "#/components/schemas/Order"
+                "$ref": "#/components/schemas/Cheque"
             text/json:
               schema:
-                "$ref": "#/components/schemas/Order"
+                "$ref": "#/components/schemas/Cheque"
   "/api/Orders/{id}":
     get:
       tags:
@@ -613,19 +611,24 @@ paths:
         schema:
           type: integer
           format: int32
+      - name: fullInfo
+        in: query
+        schema:
+          type: boolean
+          default: false
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                "$ref": "#/components/schemas/Order"
+                "$ref": "#/components/schemas/Cheque"
             application/json:
               schema:
-                "$ref": "#/components/schemas/Order"
+                "$ref": "#/components/schemas/Cheque"
             text/json:
               schema:
-                "$ref": "#/components/schemas/Order"
+                "$ref": "#/components/schemas/Cheque"
     put:
       tags:
       - Orders
@@ -636,30 +639,35 @@ paths:
         schema:
           type: integer
           format: int32
+      - name: fullInfo
+        in: query
+        schema:
+          type: boolean
+          default: false
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/Order"
+              "$ref": "#/components/schemas/Cheque"
           text/json:
             schema:
-              "$ref": "#/components/schemas/Order"
+              "$ref": "#/components/schemas/Cheque"
           application/*+json:
             schema:
-              "$ref": "#/components/schemas/Order"
+              "$ref": "#/components/schemas/Cheque"
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                "$ref": "#/components/schemas/Order"
+                "$ref": "#/components/schemas/Cheque"
             application/json:
               schema:
-                "$ref": "#/components/schemas/Order"
+                "$ref": "#/components/schemas/Cheque"
             text/json:
               schema:
-                "$ref": "#/components/schemas/Order"
+                "$ref": "#/components/schemas/Cheque"
     delete:
       tags:
       - Orders
@@ -805,25 +813,32 @@ paths:
     get:
       tags:
       - StaffUsers
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/StaffUser"
+                "$ref": "#/components/schemas/StaffUserIEnumerablePaginatableResponseObject"
             application/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/StaffUser"
+                "$ref": "#/components/schemas/StaffUserIEnumerablePaginatableResponseObject"
             text/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/StaffUser"
+                "$ref": "#/components/schemas/StaffUserIEnumerablePaginatableResponseObject"
     post:
       tags:
       - StaffUsers
@@ -926,25 +941,32 @@ paths:
     get:
       tags:
       - Suppliers
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Supplier"
+                "$ref": "#/components/schemas/SupplierIEnumerablePaginatableResponseObject"
             application/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Supplier"
+                "$ref": "#/components/schemas/SupplierIEnumerablePaginatableResponseObject"
             text/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Supplier"
+                "$ref": "#/components/schemas/SupplierIEnumerablePaginatableResponseObject"
     post:
       tags:
       - Suppliers
@@ -1047,25 +1069,32 @@ paths:
     get:
       tags:
       - Transactions
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
       responses:
         '200':
           description: Success
           content:
             text/plain:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Transaction"
+                "$ref": "#/components/schemas/TransactionIEnumerablePaginatableResponseObject"
             application/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Transaction"
+                "$ref": "#/components/schemas/TransactionIEnumerablePaginatableResponseObject"
             text/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Transaction"
+                "$ref": "#/components/schemas/TransactionIEnumerablePaginatableResponseObject"
     post:
       tags:
       - Transactions
@@ -1185,6 +1214,18 @@ components:
           type: string
           nullable: true
       additionalProperties: false
+    AppointmentIEnumerablePaginatableResponseObject:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Appointment"
+          nullable: true
+        nextPage:
+          type: string
+          nullable: true
+      additionalProperties: false
     Cheque:
       type: object
       properties:
@@ -1202,6 +1243,8 @@ components:
           items:
             "$ref": "#/components/schemas/OrderItemsWithPrices"
           nullable: true
+        appointment:
+          "$ref": "#/components/schemas/Appointment"
         paymentType:
           type: string
           nullable: true
@@ -1220,6 +1263,18 @@ components:
         priceWithTaxAndDiscount:
           type: integer
           format: int32
+      additionalProperties: false
+    ChequeIEnumerablePaginatableResponseObject:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Cheque"
+          nullable: true
+        nextPage:
+          type: string
+          nullable: true
       additionalProperties: false
     Customer:
       type: object
@@ -1245,6 +1300,18 @@ components:
             type: string
           nullable: true
       additionalProperties: false
+    CustomerIEnumerablePaginatableResponseObject:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Customer"
+          nullable: true
+        nextPage:
+          type: string
+          nullable: true
+      additionalProperties: false
     Inventory:
       type: object
       properties:
@@ -1261,18 +1328,17 @@ components:
           type: integer
           format: int32
       additionalProperties: false
-    Order:
+    InventoryIEnumerablePaginatableResponseObject:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-        appointmentId:
-          type: integer
-          format: int32
-        dateTime:
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Inventory"
+          nullable: true
+        nextPage:
           type: string
-          format: date-time
+          nullable: true
       additionalProperties: false
     OrderItems:
       type: object
@@ -1286,6 +1352,18 @@ components:
         quantity:
           type: integer
           format: int32
+      additionalProperties: false
+    OrderItemsIEnumerablePaginatableResponseObject:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/OrderItems"
+          nullable: true
+        nextPage:
+          type: string
+          nullable: true
       additionalProperties: false
     OrderItemsWithPrices:
       type: object
@@ -1347,6 +1425,18 @@ components:
           type: string
           nullable: true
       additionalProperties: false
+    StaffUserIEnumerablePaginatableResponseObject:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/StaffUser"
+          nullable: true
+        nextPage:
+          type: string
+          nullable: true
+      additionalProperties: false
     Supplier:
       type: object
       properties:
@@ -1357,6 +1447,18 @@ components:
           type: string
           nullable: true
         contacts:
+          type: string
+          nullable: true
+      additionalProperties: false
+    SupplierIEnumerablePaginatableResponseObject:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Supplier"
+          nullable: true
+        nextPage:
           type: string
           nullable: true
       additionalProperties: false
@@ -1387,4 +1489,16 @@ components:
         totalDiscount:
           type: integer
           format: int32
+      additionalProperties: false
+    TransactionIEnumerablePaginatableResponseObject:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Transaction"
+          nullable: true
+        nextPage:
+          type: string
+          nullable: true
       additionalProperties: false
