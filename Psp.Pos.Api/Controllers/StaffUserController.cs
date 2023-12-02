@@ -7,7 +7,7 @@ namespace Psp.Pos.Api.Controllers
     [ApiController]
     public class StaffUsersController : ControllerBase
     {
-        private static List<StaffUser> staffUsers = new List<StaffUser>
+        private static List<StaffUser> _staffUsers = new List<StaffUser>
         {
             new StaffUser { Id = 1, Name = "John Staff", Email = "john.staff@pspsps.lt", Role = "Waitstaff", Password = "password1" },
             new StaffUser { Id = 2, Name = "Jane Manager", Email = "jane.manager@pspsps.lt", Role = "Manager", Password = "password2" }
@@ -15,16 +15,20 @@ namespace Psp.Pos.Api.Controllers
 
         // GET: api/staffusers
         [HttpGet]
-        public ActionResult<IEnumerable<StaffUser>> GetStaffUsers()
+        public ActionResult<PaginatableResponseObject<IEnumerable<StaffUser>>> GetSuppliers([FromQuery] int page = 1, [FromQuery] int pageSize = 1)
         {
-            return Ok(staffUsers);
+            var response = new PaginatableResponseObject<IEnumerable<StaffUser>>();
+            var itemsToSkip = (page - 1) * pageSize;
+            response.Data = _staffUsers.Skip(itemsToSkip).Take(pageSize).ToList();
+            response.nextPage = "https://localhost:7064/api/Products?page=" + (page + 1) + "&pageSize=" + pageSize;
+            return Ok(response);
         }
 
         // GET: api/staffusers/{id}
         [HttpGet("{id}")]
         public ActionResult<StaffUser> GetStaffUser(int id)
         {
-            var staffUser = staffUsers.Find(s => s.Id == id);
+            var staffUser = _staffUsers.Find(s => s.Id == id);
 
             if (staffUser == null)
             {
@@ -38,8 +42,8 @@ namespace Psp.Pos.Api.Controllers
         [HttpPost]
         public ActionResult<StaffUser> CreateStaffUser([FromBody] StaffUser newStaffUser)
         {
-            newStaffUser.Id = staffUsers.Count + 1;
-            staffUsers.Add(newStaffUser);
+            newStaffUser.Id = _staffUsers.Count + 1;
+            _staffUsers.Add(newStaffUser);
 
             return CreatedAtAction(nameof(GetStaffUser), new { id = newStaffUser.Id }, newStaffUser);
         }
@@ -48,7 +52,7 @@ namespace Psp.Pos.Api.Controllers
         [HttpPut("{id}")]
         public ActionResult<StaffUser> UpdateStaffUser(int id, [FromBody] StaffUser updatedStaffUser)
         {
-            var existingStaffUser = staffUsers.Find(s => s.Id == id);
+            var existingStaffUser = _staffUsers.Find(s => s.Id == id);
 
             if (existingStaffUser == null)
             {
@@ -68,14 +72,14 @@ namespace Psp.Pos.Api.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteStaffUser(int id)
         {
-            var staffUserToRemove = staffUsers.Find(s => s.Id == id);
+            var staffUserToRemove = _staffUsers.Find(s => s.Id == id);
 
             if (staffUserToRemove == null)
             {
                 return NotFound();
             }
 
-            staffUsers.Remove(staffUserToRemove);
+            _staffUsers.Remove(staffUserToRemove);
 
             return NoContent();
         }

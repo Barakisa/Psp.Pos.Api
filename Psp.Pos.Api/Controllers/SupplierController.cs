@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Psp.Pos.Api.Models;
+using System.Transactions;
 
 namespace Psp.Pos.Api.Controllers
 {
@@ -7,7 +8,7 @@ namespace Psp.Pos.Api.Controllers
     [ApiController]
     public class SuppliersController : ControllerBase
     {
-        private static List<Supplier> suppliers = new List<Supplier>
+        private static List<Supplier> _suppliers = new List<Supplier>
         {
             new Supplier { Id = 1, Name = "Supplier A", Contacts = "Contact A" },
             new Supplier { Id = 2, Name = "Supplier B", Contacts = "Contact B" }
@@ -15,16 +16,20 @@ namespace Psp.Pos.Api.Controllers
 
         // GET: api/suppliers
         [HttpGet]
-        public ActionResult<IEnumerable<Supplier>> GetSuppliers()
+        public ActionResult<PaginatableResponseObject<IEnumerable<Supplier>>> GetSuppliers([FromQuery] int page = 1, [FromQuery] int pageSize = 1)
         {
-            return Ok(suppliers);
+            var response = new PaginatableResponseObject<IEnumerable<Supplier>>();
+            var itemsToSkip = (page - 1) * pageSize;
+            response.Data = _suppliers.Skip(itemsToSkip).Take(pageSize).ToList();
+            response.nextPage = "https://localhost:7064/api/Products?page=" + (page + 1) + "&pageSize=" + pageSize;
+            return Ok(response);
         }
 
         // GET: api/suppliers/{id}
         [HttpGet("{id}")]
         public ActionResult<Supplier> GetSupplier(int id)
         {
-            var supplier = suppliers.Find(s => s.Id == id);
+            var supplier = _suppliers.Find(s => s.Id == id);
 
             if (supplier == null)
             {
@@ -38,8 +43,8 @@ namespace Psp.Pos.Api.Controllers
         [HttpPost]
         public ActionResult<Supplier> CreateSupplier([FromBody] Supplier newSupplier)
         {
-            newSupplier.Id = suppliers.Count + 1;
-            suppliers.Add(newSupplier);
+            newSupplier.Id = _suppliers.Count + 1;
+            _suppliers.Add(newSupplier);
 
             return CreatedAtAction(nameof(GetSupplier), new { id = newSupplier.Id }, newSupplier);
         }
@@ -48,7 +53,7 @@ namespace Psp.Pos.Api.Controllers
         [HttpPut("{id}")]
         public ActionResult<Supplier> UpdateSupplier(int id, [FromBody] Supplier updatedSupplier)
         {
-            var existingSupplier = suppliers.Find(s => s.Id == id);
+            var existingSupplier = _suppliers.Find(s => s.Id == id);
 
             if (existingSupplier == null)
             {
@@ -66,14 +71,14 @@ namespace Psp.Pos.Api.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteSupplier(int id)
         {
-            var supplierToRemove = suppliers.Find(s => s.Id == id);
+            var supplierToRemove = _suppliers.Find(s => s.Id == id);
 
             if (supplierToRemove == null)
             {
                 return NotFound();
             }
 
-            suppliers.Remove(supplierToRemove);
+            _suppliers.Remove(supplierToRemove);
 
             return NoContent();
         }

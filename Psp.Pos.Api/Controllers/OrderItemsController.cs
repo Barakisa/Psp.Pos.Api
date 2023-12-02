@@ -8,24 +8,28 @@ namespace Psp.Pos.Api.Controllers
     [ApiController]
     public class OrderItemsController : ControllerBase
     {
-        private static List<OrderItems> OrderItemsList = new List<OrderItems>
+        private static List<OrderItems> _orderItemsList = new List<OrderItems>
         {
             new OrderItems { OrderId = 101, ProductId = 201, Quantity = 2 },
             new OrderItems { OrderId = 102, ProductId = 202, Quantity = 1 }
         };
 
-        // GET: api/OrderItems
+        // GET: api/suppliers
         [HttpGet]
-        public ActionResult<IEnumerable<OrderItems>> GetOrderItems()
+        public ActionResult<PaginatableResponseObject<IEnumerable<OrderItems>>> GetSuppliers([FromQuery] int page = 1, [FromQuery] int pageSize = 1)
         {
-            return Ok(OrderItemsList);
+            var response = new PaginatableResponseObject<IEnumerable<OrderItems>>();
+            var itemsToSkip = (page - 1) * pageSize;
+            response.Data = _orderItemsList.Skip(itemsToSkip).Take(pageSize).ToList();
+            response.nextPage = "https://localhost:7064/api/Products?page=" + (page + 1) + "&pageSize=" + pageSize;
+            return Ok(response);
         }
 
         // GET: api/OrderItems/{orderId}/{productId}
         [HttpGet("{orderId}/{productId}")]
         public ActionResult<OrderItems> GetOrderItems(int orderId, int productId)
         {
-            var orderItems = OrderItemsList.Find(od => od.OrderId == orderId && od.ProductId == productId);
+            var orderItems = _orderItemsList.Find(od => od.OrderId == orderId && od.ProductId == productId);
 
             if (orderItems == null)
             {
@@ -39,7 +43,7 @@ namespace Psp.Pos.Api.Controllers
         [HttpPost]
         public ActionResult<OrderItems> CreateOrderItems([FromBody] OrderItems newOrderItems)
         {
-            OrderItemsList.Add(newOrderItems);
+            _orderItemsList.Add(newOrderItems);
 
             return CreatedAtAction(nameof(GetOrderItems), newOrderItems);
         }
@@ -48,7 +52,7 @@ namespace Psp.Pos.Api.Controllers
         [HttpPut("{orderId}/{productId}")]
         public ActionResult<OrderItems> UpdateOrderItems([FromBody] OrderItems updatedOrderItems)
         {
-            var existingOrderItems = OrderItemsList.Find(od => od.OrderId == updatedOrderItems.OrderId && od.ProductId == updatedOrderItems.ProductId);
+            var existingOrderItems = _orderItemsList.Find(od => od.OrderId == updatedOrderItems.OrderId && od.ProductId == updatedOrderItems.ProductId);
 
             if (existingOrderItems == null)
             {
@@ -67,14 +71,14 @@ namespace Psp.Pos.Api.Controllers
         [HttpDelete("{orderId}/{productId}")]
         public ActionResult DeleteOrderItems(int orderId, int productId)
         {
-            var orderItemsToRemove = OrderItemsList.Find(od => od.OrderId == orderId && od.ProductId == productId);
+            var orderItemsToRemove = _orderItemsList.Find(od => od.OrderId == orderId && od.ProductId == productId);
 
             if (orderItemsToRemove == null)
             {
                 return NotFound();
             }
 
-            OrderItemsList.Remove(orderItemsToRemove);
+            _orderItemsList.Remove(orderItemsToRemove);
 
             return NoContent();
         }

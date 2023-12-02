@@ -18,10 +18,9 @@ namespace Psp.Pos.Api.Controllers
         [HttpGet]
         public ActionResult<PaginatableResponseObject<IEnumerable<Product>>> GetProducts([FromQuery] int page = 1, [FromQuery] int pageSize = 1)
         {
-            var products = _products;
             var response = new PaginatableResponseObject<IEnumerable<Product>>();
             var itemsToSkip = (page - 1) * pageSize;
-            response.Data = products.Skip(itemsToSkip).Take(pageSize).ToList();
+            response.Data = _products.Skip(itemsToSkip).Take(pageSize).ToList();
             response.nextPage = "https://localhost:7064/api/Products?page=" + (page + 1) + "&pageSize=" + pageSize;
             return Ok(response);
         }

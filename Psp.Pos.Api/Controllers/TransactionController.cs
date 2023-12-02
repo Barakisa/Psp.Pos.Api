@@ -9,7 +9,7 @@ namespace Psp.Pos.Api.Controllers
     [ApiController]
     public class TransactionsController : ControllerBase
     {
-        private static List<Transaction> transactions = new List<Transaction>
+        private static List<Transaction> _transactions = new List<Transaction>
         {
             new Transaction { Id = 1, OrderId = 101, StaffUserId = 201, PaymentType = "Credit Card", DiscountApplied = 10, Tax = 5, Tip = 2, TotalDiscount = 12 },
             new Transaction { Id = 2, OrderId = 102, StaffUserId = 202, PaymentType = "Cash", DiscountApplied = 5, Tax = 2, Tip = 1, TotalDiscount = 6 }
@@ -17,16 +17,19 @@ namespace Psp.Pos.Api.Controllers
 
         // GET: api/transactions
         [HttpGet]
-        public ActionResult<IEnumerable<Transaction>> GetTransactions()
+        public ActionResult<PaginatableResponseObject<IEnumerable<Transaction>>> GetTransactions([FromQuery] int page = 1, [FromQuery] int pageSize = 1)
         {
-            return Ok(transactions);
+            var response = new PaginatableResponseObject<IEnumerable<Transaction>>();
+            var itemsToSkip = (page - 1) * pageSize;
+            response.Data = _transactions.Skip(itemsToSkip).Take(pageSize).ToList();
+            response.nextPage = "https://localhost:7064/api/Products?page=" + (page + 1) + "&pageSize=" + pageSize;
+            return Ok(response);
         }
-
         // GET: api/transactions/{id}
         [HttpGet("{id}")]
         public ActionResult<Transaction> GetTransaction(int id)
         {
-            var transaction = transactions.Find(t => t.Id == id);
+            var transaction = _transactions.Find(t => t.Id == id);
 
             if (transaction == null)
             {
@@ -40,8 +43,8 @@ namespace Psp.Pos.Api.Controllers
         [HttpPost]
         public ActionResult<Transaction> CreateTransaction([FromBody] Transaction newTransaction)
         {
-            newTransaction.Id = transactions.Count + 1;
-            transactions.Add(newTransaction);
+            newTransaction.Id = _transactions.Count + 1;
+            _transactions.Add(newTransaction);
 
             return CreatedAtAction(nameof(GetTransaction), new { id = newTransaction.Id }, newTransaction);
         }
@@ -50,7 +53,7 @@ namespace Psp.Pos.Api.Controllers
         [HttpPut("{id}")]
         public ActionResult<Transaction> UpdateTransaction(int id, [FromBody] Transaction updatedTransaction)
         {
-            var existingTransaction = transactions.Find(t => t.Id == id);
+            var existingTransaction = _transactions.Find(t => t.Id == id);
 
             if (existingTransaction == null)
             {
@@ -73,14 +76,14 @@ namespace Psp.Pos.Api.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteTransaction(int id)
         {
-            var transactionToRemove = transactions.Find(t => t.Id == id);
+            var transactionToRemove = _transactions.Find(t => t.Id == id);
 
             if (transactionToRemove == null)
             {
                 return NotFound();
             }
 
-            transactions.Remove(transactionToRemove);
+            _transactions.Remove(transactionToRemove);
 
             return NoContent();
         }
