@@ -6,4 +6,5 @@
         public int AppointmentId { get; set; }
         public DateTime DateTime { get; set; }
     }
+
 }
