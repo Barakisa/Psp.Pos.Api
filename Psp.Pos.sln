@@ -4,10 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Psp.Pos.Api", "Psp.Pos.Api\Psp.Pos.Api.csproj", "{AD49C58A-9EA2-4AA9-9EAB-FE490D18ACA4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4C64D81E-377C-40D1-9FAA-EEA82891C486} = {4C64D81E-377C-40D1-9FAA-EEA82891C486}
+		{D4244374-71EE-4351-ABBF-F83EB726277A} = {D4244374-71EE-4351-ABBF-F83EB726277A}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Psp.Pos.Application", "Psp.Pos.Application\Psp.Pos.Application.csproj", "{D4244374-71EE-4351-ABBF-F83EB726277A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Psp.Pos.Infrastructure", "Psp.Pos.Infrastructure\Psp.Pos.Infrastructure.csproj", "{4C64D81E-377C-40D1-9FAA-EEA82891C486}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D4244374-71EE-4351-ABBF-F83EB726277A} = {D4244374-71EE-4351-ABBF-F83EB726277A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
