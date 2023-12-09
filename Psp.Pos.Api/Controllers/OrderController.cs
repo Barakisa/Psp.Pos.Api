@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Psp.Pos.Api.Models;
+using Psp.Pos.Api.Services;
 using static NuGet.Packaging.PackagingConstants;
 
 namespace Psp.Pos.Api.Controllers
@@ -86,8 +87,11 @@ namespace Psp.Pos.Api.Controllers
         [HttpPost]
         public ActionResult<Cheque> CreateOrder([FromBody] Cheque newOrder, [FromQuery] bool fullInfo = false)
         {
-            newOrder.Id = _cheques.Count + 1;
-            _cheques.Add(newOrder);
+            //newOrder.Id = _cheques.Count + 1;
+            //_cheques.Add(newOrder);
+
+            //sita returninti
+            OrderService.process(newOrder).ToResponse();
 
             return CreatedAtAction(nameof(GetOrder), new { id = newOrder.Id }, newOrder);
         }
