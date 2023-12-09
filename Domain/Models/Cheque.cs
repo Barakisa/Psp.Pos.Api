@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using NuGet.Packaging.Signing;
+﻿
 
-namespace Psp.Pos.Api.Models
+namespace Psp.Pos.Domain
 {
     public class Cheque
     {
