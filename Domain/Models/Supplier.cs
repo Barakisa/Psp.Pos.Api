@@ -1,4 +1,4 @@
-﻿namespace Psp.Pos.Api.Models
+﻿namespace Psp.Pos.Domain
 {
     public class Supplier
     {

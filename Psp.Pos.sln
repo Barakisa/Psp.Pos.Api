@@ -17,6 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Psp.Pos.Application", "Psp.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Psp.Pos.Infrastructure", "Psp.Pos.Infrastructure\Psp.Pos.Infrastructure.csproj", "{4C64D81E-377C-40D1-9FAA-EEA82891C486}"
 	ProjectSection(ProjectDependencies) = postProject
+		{4289CD03-FA85-4AD1-A35E-16FEC2335988} = {4289CD03-FA85-4AD1-A35E-16FEC2335988}
 		{D4244374-71EE-4351-ABBF-F83EB726277A} = {D4244374-71EE-4351-ABBF-F83EB726277A}
 	EndProjectSection
 EndProject
